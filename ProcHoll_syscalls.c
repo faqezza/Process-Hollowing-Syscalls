@@ -19,9 +19,7 @@ int main()
     STARTUPINFOA startupInfo = { sizeof(STARTUPINFO) };
     PROCESS_INFORMATION processInfo = { 0 };
    
-    HANDLE processHandle = processInfo.hProcess;  //Obtén el identificador del proceso
-
-    
+        
     PVOID dllPathMemory = NULL;  //Asigna memoria en el proceso para almacenar la ruta de la DLL
     SIZE_T dllPathSize = strlen(dllPath) + 1;
 
@@ -37,7 +35,8 @@ int main()
         return 1;
     }
 
-
+    HANDLE processHandle = processInfo.hProcess;  //Obtén el identificador del proceso
+    
     NtAllocateVirtualMemory(processHandle, &dllPathMemory, 0, &dllPathSize, MEM_COMMIT, PAGE_READWRITE);
 
     if (!dllPathMemory)
